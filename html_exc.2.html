@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="white" />
+  <meta charset="utf-8" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel='stylesheet' href='css/styles.css'>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <title>Tennis Stats Tracker</title>
+
+</head>
+
+<body>
+
+  <div class="header">
+    <form id="form">
+      <div class="container">
+        <h1>Register</h1>
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="array[]" id="email" required>
+
+        <label for="name"><b>Name</b></label>
+        <input type="name" placeholder="Enter Name" name="array[]" id="name" required>
+
+        <label for="Last-name"><b>Last Name</b></label>
+        <input type="Last-name" placeholder="Enter Last Name" name="array[]" id="Last-name" required>
+
+        <label for="Years"><b>Years of playing</b></label>
+        <input type="Years" placeholder="Enter Years" name="array[]" id="Years" required>
+
+        <label for="Age"><b>Age</b></label>
+        <input type="Age" placeholder="Enter Age" name="array[]" id="Age" required>
+
+        <hr>
+
+        <button type="button" class="registerbtn" onclick="Profile()">Register</button>
+
+      </div>
+    </form>
+
+    <h2 id="welcome-text" style="visibility:hidden">Welcome</h2>
+    <button type="button" id="addbtn" style="visibility: hidden;" class="addbtn" onclick="add_user()">Enter New User</button>
+
+  </div>
+
+  <script type="text/javascript">
+    var k = "The respective values are :";
+    function Profile() {
+      var input = document.getElementsByName('array[]');
+
+      for (var i = 0; i < input.length; i++) {
+        var a = input[i];
+        console.log(a.value)
+      }
+
+      text = document.getElementById('welcome-text');
+      text.style.visibility = 'visible';
+      general_site = document.getElementById('general_site');
+      general_site.style.visibility = 'visible';
+      document.getElementById('welcome-text').innerHTML = 'Welcome' + ' ' + input[1].value;
+      document.getElementById('About-text').innerHTML = 'About' + ' ' + input[1].value;
+      document.getElementById('Years2').innerHTML = input[3].value;
+      document.getElementById('Age2').innerText = input[4].value;
+      var x = document.getElementById('form');
+      if (x.style.display === "none") {
+        x.style.display = "block";
+      } else {
+        x.style.display = "none";
+      }
+
+      var y = document.getElementById('addbtn');
+      if (y.style.visibility === "hidden") {
+        y.style.visibility = "visible";
+      } else {
+        y.style.visibility = "hidden";
+      }
+     
+
+    
+    }
+
+    function add_user() {
+      text = document.getElementById('welcome-text');
+      text.style.visibility = 'hidden';
+      general_site = document.getElementById('general_site');
+      general_site.style.visibility = 'hidden';
+      var x = document.getElementById('form');
+      x.style.display = 'block';
+      var y = document.getElementById('addbtn');
+      y.style.visibility = 'hidden';
+      }
+  </script>
+
+  <div id="general_site" class="row" style="visibility:hidden;">
+    <div class="leftcolumn">
+      <div class="card">
+        <h2>Ranking Table</h2>
+        <div id="wrapper">
+
+          <div id="checkbox_div">
+            <p>Select to Show/Hide Column</p>
+            <li><input type="checkbox" value="hide" id="date_col" onchange="hide_show_table(this.id);">Date</li>
+            <li><input type="checkbox" value="hide" id="top_rank_col" onchange="hide_show_table(this.id);">Top Rank by
+              Year</li>
+            <li><input type="checkbox" value="hide" id="year_end_col" onchange="hide_show_table(this.id);">Year-end
+              Ranking</li>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+
+          <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for year..">
+          <table id="table" class="table-sortable">
+
+            <thead>
+              <tr id="ttr">
+                <th id="date_col_head" onclick="sortTable1(0)">Date</th>
+                <th id="top_rank_col_head" onclick="sortTable1(1)">Top Rank by Year</th>
+                <th id="year_end_col_head" onclick="sortTable1(2)">Year-end Ranking</th>
+              </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+          </table>
+          <script>
+            function myFunction3() {
+              // Declare variables
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput3");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("table");
+              tr = table.getElementsByTagName("tr");
+
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+            </script>
+          <form style="padding-top:20px;" id="table_data">
+            <label for="fname">Year</label><br>
+            <input type="text" id="date" name="array2"><br>
+            <label for="lname">Top Rank By Year</label><br>
+            <input type="text" id="rank_by_year" name="array2"><br><br>
+            <label for="lname">Year-end Ranking</label><br>
+            <input type="text" id="year_end_rank" name="array2"><br><br>
+            <input type="submit" value="Add to table" onclick="add_row()">
+          </form>
+          <script>
+            function add_row() {
+              // var input = document.getElementsByName('array2');
+              // var table = document.getElementById("table");
+
+              // // Create an empty <tr> element and add it to the 1st position of the table:
+              // var row = table.insertRow();
+
+              // // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+              // var cell1 = row.insertCell();
+              // var cell2 = row.insertCell();
+              // var cell3 = row.insertCell();
+
+
+              // // Add some text to the new cells:
+              // cell1.innerHTML = input[0].value;
+              // cell2.innerHTML = input[1].value;
+              // cell3.innerHTML = input[2].value;
+              // var table = document.getElementById("table"), maxVal;
+
+              //   for(var i = 1; i < table.rows.length; i++)
+              //   {
+              //       if(i === 1){
+              //           maxVal = table.rows[i].cells[0].innerHTML;
+              //           min_rank = table.rows[i].cells[1].innerHTML;
+              //           rankValfinal = table.rows[i].cells[2].innerHTML;
+              //       }
+              //     else
+              //       {
+              //         var max = 0;
+              //         var newvalue = 0;
+              //         for (var i=0; i < table.rows.length; i++){
+              //             newvalue=parseInt(table.rows[i].cells[0].innerHTML);
+              //             if (newvalue > max) 
+              //               max = newvalue;
+              //               console.log(max);
+              //               console.log(typeof max)
+              //         }
+              //       min_rank = 10000000;
+              //       for (var i=0; i < table.rows.length; i++){
+              //         if (table.rows[i].cells[0].innerHTML = max.toString()){
+              //             if (parseInt(table.rows[i].cells[1].innerHTML) < min_rank){
+              //               min_rank = parseInt(table.rows[i].cells[1].innerHTML);
+              //             }
+              //         }
+              //         console.log(min_rank);
+              //         console.log(typeof min_rank)
+
+              //       }
+              //       }
+              //   }
+
+
+
+
+             
+
+                // Find a <table> element with id="myTable":
+
+              
+              var input = document.getElementsByName('array2');
+              var table = document.getElementById("table");
+
+              // Create an empty <tr> element and add it to the 1st position of the table:
+              var row = table.insertRow();
+
+              // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+              var cell1 = row.insertCell();
+              var cell2 = row.insertCell();
+              var cell3 = row.insertCell();
+
+              // Add some text to the new cells:
+              cell1.innerHTML = input[0].value;
+              cell2.innerHTML = input[1].value;
+              cell3.innerHTML = input[2].value;
+              cell1.className = 'date_col';
+              cell2.className = 'top_rank_col';
+              cell3.className = 'year_end_col';
+              // document.getElementById('Rank').innerHTML = min_rank;
+              var form = document.getElementById("table_data");
+              function handleForm(event) { event.preventDefault(); }
+              form.addEventListener('submit', handleForm);
+            }
+          </script>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Matches Stats for 2021</h2>
+        <div id="wrapper_2">
+
+          <div id="checkbox_div_2">
+            <p>Select to Show/Hide Column</p>
+            <li><input type="checkbox" value="hide" id="tournament_col" onchange="hide_show_table(this.id);">Tournament
+            </li>
+            <li><input type="checkbox" value="hide" id="rank_col" onchange="hide_show_table(this.id);">Ranking</li>
+            <li><input type="checkbox" value="hide" id="year_col" onchange="hide_show_table(this.id);">Year</li>
+            <li><input type="checkbox" value="hide" id="against_col" onchange="hide_show_table(this.id);">Playing
+              against</li>
+            <li><input type="checkbox" value="hide" id="wl_col" onchange="hide_show_table(this.id);">W/L</li>
+            <li><input type="checkbox" value="hide" id="score_col" onchange="hide_show_table(this.id);">Score</li>
+          </div>
+        </div>
+        <div style="overflow-x:auto;">
+          <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for opponent..">
+          <input type="text" id="myInput2" onkeyup="myFunction2()" placeholder="Search for tournament..">
+          <table id="table_2" class="table-sortable_2>
+        <thead>
+        <tr id=" ttr_2">
+            <th id="tournament_col_head" onclick="sortTable2(0)">Tournament</th>
+            <th id="rank_col_head" onclick="sortTable2(1)">Ranking</th>
+            <th id="year_col_head" onclick="sortTable2(2)">Year</th>
+            <th id="against_col_head" onclick="sortTable2(3)">Playing against</th>
+            <th id="wl_col_head" onclick="sortTable2(4)">W/L</th>
+            <th id="score_col_head" onclick="sortTable2(5)">Score</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+
+          </table>
+          <script>
+            function myFunction() {
+              // Declare variables
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("table_2");
+              tr = table.getElementsByTagName("tr");
+
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+
+            function myFunction2() {
+              // Declare variables
+              var input, filter, table, tr, td, i, txtValue;
+              input = document.getElementById("myInput2");
+              filter = input.value.toUpperCase();
+              table = document.getElementById("table_2");
+              tr = table.getElementsByTagName("tr");
+
+              // Loop through all table rows, and hide those who don't match the search query
+              for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                  txtValue = td.textContent || td.innerText;
+                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                  } else {
+                    tr[i].style.display = "none";
+                  }
+                }
+              }
+            }
+          </script>
+          <form style="padding-top:20px;" id="table_data2">
+            <label for="fname">Tournament</label><br>
+            <input type="text" id="date" name="array3"><br>
+            <label for="lname">Ranking</label><br>
+            <input type="text" id="rank_by_year" name="array3"><br><br>
+            <label for="lname">Year</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <label for="lname">Playing</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <label for="lname">WL</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <label for="lname">Score</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <input type="submit" value="Add to table" onclick="add_row2()">
+          </form>
+          <script>
+            var k = "The respective values are :";
+            function add_row2() {
+              var input = document.getElementsByName('array3');
+
+              for (var i = 0; i < input.length; i++) {
+                var a = input[i];
+                console.log(a.value)
+
+                // Find a <table> element with id="myTable":
+
+              }
+              var table = document.getElementById("table_2");
+
+              // Create an empty <tr> element and add it to the 1st position of the table:
+              var row = table.insertRow();
+              
+
+              // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+              var cell1 = row.insertCell();
+              var cell2 = row.insertCell();
+              var cell3 = row.insertCell();
+              var cell4 = row.insertCell();
+              var cell5 = row.insertCell();
+              var cell6 = row.insertCell();
+              cell1.className = 'tournament_col';
+              cell2.className = 'rank_col';
+              cell3.className = 'year_col';
+              cell4.className = 'against_col';
+              cell5.className = 'wl_col';
+              cell6.className = 'score_col';
+
+
+              // Add some text to the new cells:
+              cell1.innerHTML = input[0].value;
+              cell2.innerHTML = input[1].value;
+              cell3.innerHTML = input[2].value;
+              cell4.innerHTML = input[3].value;
+              cell5.innerHTML = input[4].value;
+              cell6.innerHTML = input[5].value;
+              var table = document.getElementById("table_2"), countw = 0;
+
+              for (var i = 1; i < table.rows.length; i++) {
+                if (table.rows[i].cells[4].innerHTML === "W") {
+                  countw++
+                }
+              }
+              document.getElementById('countw').innerHTML = countw;
+
+              var table = document.getElementById("table_2"), countl = 0;
+
+              for (var i = 1; i < table.rows.length; i++) {
+                if (table.rows[i].cells[4].innerHTML === "L") {
+                  countl++
+                }
+              }
+              document.getElementById('countl').innerHTML = countl;
+              var rowCountMatches = document.getElementById('table_2').rows.length;
+              document.getElementById('Mathes').innerHTML = rowCountMatches - 1;
+
+              var form = document.getElementById("table_data2");
+              function handleForm(event) { event.preventDefault(); }
+              form.addEventListener('submit', handleForm);
+            }
+          </script>
+        </div>
+      </div>
+
+    </div>
+    <div class="rightcolumn">
+      <div class="card" style="position:fixed;width: 20%;">
+        <h2 id="About-text">About</h2>
+
+        <p></p>
+        <span style="font-size:14px; color:#b36a5e; font-weight:bold; text-align: center">Years of Playing: </span><span
+          style="font-size:14px; color:#b36a5e; font-weight:bold;text-align: center;" id="Years2"></span>
+        <p></p>
+        <span style="font-size:14px; color:#b36a5e; font-weight:bold;">Current Rank: </span><span
+          style="font-size:14px; color:#b36a5e; font-weight:bold" id="Rank">No values yet</span>
+        <p></p>
+        <span style="font-size:14px; color:#b36a5e; font-weight:bold;">Matches played: </span><span
+          style="font-size:14px; color:#b36a5e; font-weight:bold" id="Mathes">No values yet</span>
+        <p></p>
+        <span style="font-size:14px; color:#b36a5e; font-weight:bold;">Wins: </span><span
+          style="font-size:14px; color:#b36a5e; font-weight:bold" id="countw">No values yet</span>
+        <p></p>
+        <span style="font-size:14px; color:#b36a5e; font-weight:bold;">Loses: </span><span
+          style="font-size:14px; color:#b36a5e; font-weight:bold" id="countl">No values yet</span>
+        <p></p>
+        <span style="font-size:14px; color:#b36a5e; font-weight:bold;">Age: </span><span
+          style="font-size:14px; color:#b36a5e; font-weight:bold;" id="Age2"></span>
+        <p></p>
+        <!-- <script type="text/javascript">
+        var k = "The respective values are :";
+        function Profile() {
+            var input = document.getElementsByName('array[]');
+      
+            for (var i = 0; i < input.length; i++) {
+                var a = input[i];
+                console.log(a.value)
+            }
+      
+            text = document.getElementById('welcome-text');
+            text.style.visibility = 'visible';
+            document.getElementById('welcome-text').innerHTML = 'Welcome' + ' ' + input[1].value;
+            document.getElementById('About-text').innerHTML = 'About' + ' ' + input[1].value;
+            document.getElementById('Years').innerHTML = input[3].value;
+            document.getElementById('Age').innerHTML = input[4].value;
+            form = document.getElementById('form');
+            form.remove();
+      
+            
+        }
+      </script> -->
+        <script>
+          //Caluclation for About me section//
+          var rowCountMatches = document.getElementById('table_2').rows.length;
+          document.getElementById('Mathes').innerHTML = rowCountMatches - 1;
+        // var rowCountYears = document.getElementById('table').rows.length;
+        // document.getElementById('Years').innerHTML = rowCountYears-1;
+        // var birthyear= 1995
+        // var currentyear = new Date().getFullYear()
+        // var age= currentyear-birthyear
+        // document.getElementById('Age').innerHTML = age;
+        </script>
+      </div>
+    </div>
+
+  </div>
+  <div>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top ▲</button>
+  </div>
+  <div>
+    <div class="footer">
+      <h5>Follow me</h5>
+      <div id="social_icon_footer">
+        <div id="social_container">
+          <a href="https://www.facebook.com/mariasakkariofficial"><i id="social-fb"
+              class="fa fa-facebook-square fa-3x social"> <span id="Facebook-text"> Facebook</span></i></a>
+          <a href="https://twitter.com/mariasakkari"><i id="social-tw" class="fa fa-twitter-square fa-3x social"><span
+                id="twitter-text"> Twitter</span></i></a>
+          <a href="mailto:sakkari@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"><span
+                id="email-text"> Email</span></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    var array = [["2021", "19", ""],
+    ["2020", "20", "22"],
+    ["2019", "22", "23"],
+    ["2018", "29", "42"],
+    ["2017", "48", "52"],
+    ["2016", "89", "89"],
+    ["2015", "168", "188"],
+    ["2014", "284", "301"],
+    ["2013", "544", "610"],
+    ["2012", "568", "627"],
+    ["2011", "698", "702"]],
+      //add values to table with ranks// 
+      table = document.getElementById("table");
+    for (var i = 1; i < table.rows.length; i++) {
+      for (var j = 0; j < table.rows[i].cells.length; j++) {
+        table.rows[i].cells[j].innerHTML = array[i - 1][j];
+      }
+
+    }
+
+    //Caluclation for About me section//
+    var table = document.getElementById("table"), maxVal;
+
+    for (var i = 1; i < table.rows.length; i++) {
+      if (i === 1) {
+        maxVal = table.rows[i].cells[0].innerHTML;
+        rankVal = table.rows[i].cells[1].innerHTML;
+        rankValfinal = table.rows[i].cells[2].innerHTML;
+      }
+      else if (maxVal < new Date().getFullYear()) {
+        maxVal = table.rows[i].cells[0].innerHTML;
+        rankVal = table.rows[i].cells[1].innerHTML;
+        rankValfinal = table.rows[i].cells[2].innerHTML;
+      }
+    }
+    document.getElementById('Rank').innerHTML = rankVal;
+
+
+    //Show/hide elenebt for both tables//
+    function hide_show_table(col_name) {
+      var checkbox_val = document.getElementById(col_name).value;
+      if (checkbox_val == "hide") {
+        var all_col = document.getElementsByClassName(col_name);
+        for (var i = 0; i < all_col.length; i++) {
+          all_col[i].style.display = "none";
+        }
+        document.getElementById(col_name + "_head").style.display = "none";
+        document.getElementById(col_name).value = "show";
+      }
+
+      else {
+        var all_col = document.getElementsByClassName(col_name);
+        for (var i = 0; i < all_col.length; i++) {
+          all_col[i].style.display = "table-cell";
+        }
+        document.getElementById(col_name + "_head").style.display = "table-cell";
+        document.getElementById(col_name).value = "hide";
+      }
+    }
+
+    // Sort table of ranks
+    function sortTableByColumn(table, column, asc = false) {
+      const dirModifier = asc ? 1 : -1;
+      const tBody = table.tBodies[0];
+      const rows = Array.from(tBody.querySelectorAll("tr"));
+
+
+      const sortedRows = rows.sort((a, b) => {
+        const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+        const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+
+        return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+      });
+
+      while (tBody.firstChild) {
+        tBody.removeChild(tBody.firstChild);
+      }
+
+      tBody.append(...sortedRows);
+
+      table.querySelectorAll("th").forEach(th => th.classList.remove("th-sort-asc", "th-sort-desc"));
+      table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-asc", asc);
+      table.querySelector(`th:nth-child(${column + 1})`).classList.toggle("th-sort-desc", !asc);
+    }
+
+    document.querySelectorAll(".table-sortable th").forEach(headerCell => {
+      headerCell.addEventListener("click", () => {
+        const tableElement = headerCell.parentElement.parentElement.parentElement;
+        const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+        const currentIsAscending = headerCell.classList.contains("th-sort-asc");
+
+        sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+      });
+    });
+
+
+
+
+
+    var array2 = [["Mutua Madrid Open", "19", "2021", "Amanda Anisimova", "W", "0-6 6-1 6-4"],
+    ["Mutua Madrid Open", "19", "2021", "Anett Kontaveit", "W", "6-3 6-1"],
+    ["Mutua Madrid Open", "19", "2021", "Karolina Muchova", "L", "0-6 7-6 5-6"],
+    ["Porsche Tennis Grand Prix", "19", "2021", "Petra Kvitova", "L", "3-6 6-3 3-6"],
+    ["Porsche Tennis Grand Prix", "19", "2021", "Andrea Petkovic ", "W", "6-2 6-2"],
+    ["Miami Open presented by Itaú ", "25", "2021", "Bianca Andreescu", "L", "6-7 6-3 6-7"],
+    ["Miami Open presented by Itaú ", "25", "2021", "Naomi Osaka", "W", "6-0 6-4"],
+    ["Miami Open presented by Itaú ", "25", "2021", "Jessica Pegula", "W", "6-4 2-6 7-6"],
+    ["Miami Open presented by Itaú ", "25", "2021", "Liudmila Samsonova", "W", "6-0 6-1"],
+    ["Miami Open presented by Itaú ", "25", "2021", "Arantxa Rus", "W", "6-2 6-3"],
+    ["Dubai Duty Free Tennis Championships 2021", "25", "2021", "Barbora Krejcikova ", "L", "2-6 6-7"],
+    ["Qatar Total Open 2021 ", "25", "2021", "Garbiñe Muguruza ", "L", "3-6 1-6"],
+    ["Qatar Total Open 2021 ", "25", "2021", "Madison Keys", "W", "6-2 6-2"],
+    ["Qatar Total Open 2021 ", "25", "2021", "Mayar Sherif", "W", "6-0 6-3"],
+    ["Australian Open", "23", "2021", "Kristina Mladenovic", "L", "2-6 6-0 3-6"],
+    ["Grampians Trophy ", "22", "2021", "Anett Kontaveit", "L", "6-2 3-6 9-11"],
+    ["Grampians Trophy ", "22", "2021", "Angelique Kerber", "W", "6-4 6-2"],
+    ["Grampians Trophy ", "22", "2021", "Leylah Fernandez", "W", "6-2 6-2"],
+    ["Abu Dhabi WTA Women's Tennis Open", "22", "2021", "Aryna Sabalenka", "L", "3-6 2-6"],
+    ["Abu Dhabi WTA Women's Tennis Open", "22", "2021", "Sofia Kenin", "W", "2-6 6-2 6-0"],
+    ["Abu Dhabi WTA Women's Tennis Open", "22", "2021", "Garbiñe Muguruza", "W", "7-5 6-4"],
+    ["Abu Dhabi WTA Women's Tennis Open", "22", "2021", "Cori Gauff", "W", "7-5 6-2"],
+    ["Abu Dhabi WTA Women's Tennis Open", "22", "2021", "Anastasia Potapova", "W", "6-4 6-2"]],
+      // Add values to Stats table    
+      table = document.getElementById("table_2");
+    for (var i = 1; i < table.rows.length; i++) {
+      for (var j = 0; j < table.rows[i].cells.length; j++) {
+        table.rows[i].cells[j].innerHTML = array2[i - 1][j];
+      }
+
+    }
+    // Calculations of win and losses for About me section  
+    var table = document.getElementById("table_2"), countw = 0;
+
+    for (var i = 1; i < table.rows.length; i++) {
+      if (table.rows[i].cells[4].innerHTML === "W") {
+        countw++
+      }
+    }
+    document.getElementById('countw').innerHTML = countw;
+
+    var table = document.getElementById("table_2"), countl = 0;
+
+    for (var i = 1; i < table.rows.length; i++) {
+      if (table.rows[i].cells[4].innerHTML === "L") {
+        countl++
+      }
+    }
+    document.getElementById('countl').innerHTML = countl;
+
+    // Sort stats table
+    function sortTable2(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("table_2");
+      switching = true;
+      dir = "asc";
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount++;
+        } else {
+
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+
+
+    function sortTable1(n) {
+      var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+      table = document.getElementById("table");
+      switching = true;
+      dir = "asc";
+      while (switching) {
+        switching = false;
+        rows = table.rows;
+        for (i = 1; i < (rows.length - 1); i++) {
+          shouldSwitch = false;
+
+          x = rows[i].getElementsByTagName("TD")[n];
+          y = rows[i + 1].getElementsByTagName("TD")[n];
+
+          if (dir == "asc") {
+            if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          } else if (dir == "desc") {
+            if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+              shouldSwitch = true;
+              break;
+            }
+          }
+        }
+        if (shouldSwitch) {
+
+          rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+          switching = true;
+          switchcount++;
+        } else {
+
+          if (switchcount == 0 && dir == "asc") {
+            dir = "desc";
+            switching = true;
+          }
+        }
+      }
+    }
+
+    var mybutton = document.getElementById("myBtn");
+
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        mybutton.style.display = "block";
+      } else {
+        mybutton.style.display = "none";
+      }
+    }
+
+    function topFunction() {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
+  </script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>

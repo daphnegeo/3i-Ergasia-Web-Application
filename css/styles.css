@@ -1,0 +1,251 @@
+
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  font-family: Arial;
+  padding: 20px;
+  background: #ffe1a8;
+}
+
+
+.header {
+  padding: 10px;
+  font-size: 25px;
+  text-align: center;
+  background: #c9cba3;
+}
+
+
+.leftcolumn {   
+  float: left;
+  width: 75%;
+}
+
+.rightcolumn {
+  float: left;
+  width: 25%;
+  padding-left: 20px;
+}
+
+.card {
+   background-color: white;
+   padding: 20px;
+   margin-top: 20px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.footer {
+  padding: 20px;
+  text-align: center;
+  background: #c9cba3;
+  margin-top: 20px;
+}
+
+/* Rank table */
+table {
+  border-collapse: collapse;
+  width: 50%;
+  text-align-last: center;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+tr:hover {background-color: #f5f5f5;}
+th {
+  background-color: #e26d5c;
+  color: white;
+}
+
+/* Stats table */
+#table_2 {
+  border-collapse: collapse;
+  width: 100%;
+  text-align-last: center;
+}
+
+#table_2 th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#table_2 tr:hover {background-color: #f5f5f5;}
+#table_2 th {
+  background-color: #723d46;
+  color: white;
+}
+
+/* checkbox to show/hide columns rank */
+#wrapper
+{
+ text-align:left;
+ 
+}
+
+#checkbox_div p
+{
+
+ color:#e26d5c;
+ font-weight:bold;
+ font-size:17px;
+}
+#checkbox_div li
+{
+ color:#e26d5c;
+ display:inline-flex;
+ font-size:17px;
+ margin-bottom: 10px;
+}
+#checkbox_div input[type="checkbox"]
+{
+ width:20px;
+ height:20px;
+}
+
+/* checkbox to show/hide columns stats */
+#wrapper_2
+{
+ text-align:left;
+ 
+}
+
+#checkbox_div_2 p
+{
+
+ color:#723d46;
+ font-weight:bold;
+ font-size:17px;
+}
+#checkbox_div_2 li
+{
+ color:#723d46;
+ display:inline-flex;
+ font-size:17px;
+ margin-bottom: 10px;
+}
+#checkbox_div_2 input[type="checkbox"]
+{
+ width:20px;
+ height:20px;
+}
+
+/* Footer social media*/
+#social_icon_footer a {
+  font-size: 40%;
+  color: #333;
+  padding: 10px;
+  
+} 
+
+#social_icon_footer #social-fb:hover {
+  color: #3B5998;
+}
+
+
+#social_icon_footer #social-tw:hover {
+  color: #4099FF;
+}
+
+
+#social_icon_footer #social-em:hover {
+  color: #f39c12;
+}
+
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color:#723d46;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+#myBtn:hover {
+  background-color: #555;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=name],input[type=Last-name],input[type=Years],input[type=Age] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+  }
+  
+  input[type=text]:focus, input[type=name], input[type=Last-name], input[type=Years],input[type=Age] {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Overwrite default styles of hr */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  
+  /* Set a style for the submit button */
+  .registerbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+
+  .addbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    opacity: 0.9;
+  }
+  
+  .registerbtn:hover {
+    opacity: 1;
+  }
+  
+  /* Add a blue text color to links */
+ 
+  
+  /* Set a grey background color and center the text of the "sign in" section */
+
+
+@media screen and (max-width: 800px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .leftcolumn, .rightcolumn {   
+    width: 100%;
+    padding: 0;
+  }
+}
