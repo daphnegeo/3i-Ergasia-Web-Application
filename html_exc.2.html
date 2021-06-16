@@ -10,6 +10,7 @@
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <title>Tennis Stats Tracker</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
 </head>
 
@@ -101,6 +102,18 @@
     <div class="leftcolumn">
       <div class="card">
         <h2>Ranking Table</h2>
+        <button type="button" class="collapsible">Click to insert your Stats</button>
+        <div class="content">
+           <form style="padding-top:20px;" id="table_data">
+             <label for="fname">Year</label><br>
+             <input type="text" id="date" name="array2"><br>
+             <label for="lname">Top Rank By Year</label><br>
+             <input type="text" id="rank_by_year" name="array2"><br><br>
+             <label for="lname">Year-end Ranking</label><br>
+             <input type="text" id="year_end_rank" name="array2"><br><br>
+             <input type="submit" value="Add to table" class="label add to table" style="margin-bottom: 10px;" onclick="add_row()">
+           </form>
+        </div> 
         <div id="wrapper">
 
           <div id="checkbox_div">
@@ -114,7 +127,7 @@
         </div>
         <div style="overflow-x:auto;">
 
-          <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for year..">
+          <input type="text" id="myInput3" onkeyup="myFunction3()" placeholder="Search for year.." style="width: 50%;">
           <table id="table" class="table-sortable">
 
             <thead>
@@ -152,82 +165,39 @@
               }
             }
             </script>
-          <form style="padding-top:20px;" id="table_data">
-            <label for="fname">Year</label><br>
-            <input type="text" id="date" name="array2"><br>
-            <label for="lname">Top Rank By Year</label><br>
-            <input type="text" id="rank_by_year" name="array2"><br><br>
-            <label for="lname">Year-end Ranking</label><br>
-            <input type="text" id="year_end_rank" name="array2"><br><br>
-            <input type="submit" value="Add to table" onclick="add_row()">
-          </form>
+          
+        
           <script>
+            var coll = document.getElementsByClassName("collapsible");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                  content.style.display = "none";
+                } else {
+                  content.style.display = "block";
+                }
+              });
+            }
             function add_row() {
-              // var input = document.getElementsByName('array2');
-              // var table = document.getElementById("table");
-
-              // // Create an empty <tr> element and add it to the 1st position of the table:
-              // var row = table.insertRow();
-
-              // // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-              // var cell1 = row.insertCell();
-              // var cell2 = row.insertCell();
-              // var cell3 = row.insertCell();
-
-
-              // // Add some text to the new cells:
-              // cell1.innerHTML = input[0].value;
-              // cell2.innerHTML = input[1].value;
-              // cell3.innerHTML = input[2].value;
-              // var table = document.getElementById("table"), maxVal;
-
-              //   for(var i = 1; i < table.rows.length; i++)
-              //   {
-              //       if(i === 1){
-              //           maxVal = table.rows[i].cells[0].innerHTML;
-              //           min_rank = table.rows[i].cells[1].innerHTML;
-              //           rankValfinal = table.rows[i].cells[2].innerHTML;
-              //       }
-              //     else
-              //       {
-              //         var max = 0;
-              //         var newvalue = 0;
-              //         for (var i=0; i < table.rows.length; i++){
-              //             newvalue=parseInt(table.rows[i].cells[0].innerHTML);
-              //             if (newvalue > max) 
-              //               max = newvalue;
-              //               console.log(max);
-              //               console.log(typeof max)
-              //         }
-              //       min_rank = 10000000;
-              //       for (var i=0; i < table.rows.length; i++){
-              //         if (table.rows[i].cells[0].innerHTML = max.toString()){
-              //             if (parseInt(table.rows[i].cells[1].innerHTML) < min_rank){
-              //               min_rank = parseInt(table.rows[i].cells[1].innerHTML);
-              //             }
-              //         }
-              //         console.log(min_rank);
-              //         console.log(typeof min_rank)
-
-              //       }
-              //       }
-              //   }
-
-
+            
 
 
              
 
-                // Find a <table> element with id="myTable":
+             
 
               
               var input = document.getElementsByName('array2');
               var table = document.getElementById("table");
 
-              // Create an empty <tr> element and add it to the 1st position of the table:
+        
               var row = table.insertRow();
 
-              // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+          
               var cell1 = row.insertCell();
               var cell2 = row.insertCell();
               var cell3 = row.insertCell();
@@ -247,7 +217,26 @@
           </script>
         </div>
       </div>
+     
       <div class="card">
+        <button type="button" class="collapsible2">Click to insert your Matches</button>
+        <div class="content2">
+          <form style="padding-top:20px;" id="table_data2">
+            <label for="fname">Tournament</label><br>
+            <input type="text" id="date" name="array3"><br>
+            <label for="lname">Ranking</label><br>
+            <input type="text" id="rank_by_year" name="array3"><br><br>
+            <label for="lname">Year</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <label for="lname">Playing Against</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <label for="lname">W/L</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <label for="lname">Score</label><br>
+            <input type="text" id="year_end_rank" name="array3"><br><br>
+            <input type="submit" value="Add to table" class="label add to table2" style="margin-bottom: 10px;"onclick="add_row2()">
+          </form>
+        </div>
         <h2>Matches Stats for 2021</h2>
         <div id="wrapper_2">
 
@@ -282,7 +271,26 @@
             </tbody>
 
           </table>
+          <!-- <div>
+    
+            <canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+        
+          </div> -->
           <script>
+            var coll = document.getElementsByClassName("collapsible2");
+            var i;
+
+            for (i = 0; i < coll.length; i++) {
+              coll[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var content = this.nextElementSibling;
+                if (content.style.display === "block") {
+                  content.style.display = "none";
+                } else {
+                  content.style.display = "block";
+                }
+              });
+            }
             function myFunction() {
               // Declare variables
               var input, filter, table, tr, td, i, txtValue;
@@ -327,21 +335,7 @@
               }
             }
           </script>
-          <form style="padding-top:20px;" id="table_data2">
-            <label for="fname">Tournament</label><br>
-            <input type="text" id="date" name="array3"><br>
-            <label for="lname">Ranking</label><br>
-            <input type="text" id="rank_by_year" name="array3"><br><br>
-            <label for="lname">Year</label><br>
-            <input type="text" id="year_end_rank" name="array3"><br><br>
-            <label for="lname">Playing</label><br>
-            <input type="text" id="year_end_rank" name="array3"><br><br>
-            <label for="lname">WL</label><br>
-            <input type="text" id="year_end_rank" name="array3"><br><br>
-            <label for="lname">Score</label><br>
-            <input type="text" id="year_end_rank" name="array3"><br><br>
-            <input type="submit" value="Add to table" onclick="add_row2()">
-          </form>
+          
           <script>
             var k = "The respective values are :";
             function add_row2() {
@@ -406,6 +400,28 @@
               function handleForm(event) { event.preventDefault(); }
               form.addEventListener('submit', handleForm);
             }
+
+            // var xValues = ["Win", "Loses"];
+            // var yValues = [10, countl];
+            // var barColors = ["red", "green"];
+            
+            // new Chart("myChart", {
+            //   type: "bar",
+            //   data: {
+            //     labels: xValues,
+            //     datasets: [{
+            //       backgroundColor: barColors,
+            //       data: yValues
+            //     }]
+            //   },
+            //   options: {
+            //     legend: {display: false},
+            //     title: {
+            //       display: true,
+            //       text: "My Wins and Loses"
+            //     }
+            //   }
+            // });
           </script>
         </div>
       </div>
@@ -474,9 +490,10 @@
   <div>
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top ▲</button>
   </div>
+  
   <div>
     <div class="footer">
-      <h5>Follow me</h5>
+      <!-- <h5>Follow me</h5>
       <div id="social_icon_footer">
         <div id="social_container">
           <a href="https://www.facebook.com/mariasakkariofficial"><i id="social-fb"
@@ -484,9 +501,10 @@
           <a href="https://twitter.com/mariasakkari"><i id="social-tw" class="fa fa-twitter-square fa-3x social"><span
                 id="twitter-text"> Twitter</span></i></a>
           <a href="mailto:sakkari@gmail.com"><i id="social-em" class="fa fa-envelope-square fa-3x social"><span
-                id="email-text"> Email</span></i></a>
+                id="email-text"> Email</span></i></a> -->
         </div>
       </div>
+     
     </div>
   </div>
 
@@ -627,7 +645,9 @@
 
     for (var i = 1; i < table.rows.length; i++) {
       if (table.rows[i].cells[4].innerHTML === "W") {
-        countw++
+        countw++;
+      } else if (table.rows[i].cells[4].innerHTML === "w") {
+        countw++;
       }
     }
     document.getElementById('countw').innerHTML = countw;
@@ -636,7 +656,10 @@
 
     for (var i = 1; i < table.rows.length; i++) {
       if (table.rows[i].cells[4].innerHTML === "L") {
-        countl++
+        countl++;
+      } 
+      else if (table.rows[i].cells[4].innerHTML === "l") {
+        countl++;
       }
     }
     document.getElementById('countl').innerHTML = countl;
