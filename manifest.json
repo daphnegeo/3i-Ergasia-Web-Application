@@ -1,6 +1,6 @@
 {
-    "name": "Maria Sakkari",
-    "short_name": "Sakkari",
+    "name": "Tennis Tracking App",
+    "short_name": "Tennis Tracker",
 
     "icons": [{
         "src": "assets/android-chrome-192x192.png",

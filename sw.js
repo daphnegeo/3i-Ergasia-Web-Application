@@ -1,4 +1,4 @@
-var cacheName = 'sakkari-pwa';
+var cacheName = 'tennis-tracker-pwa';
 var filesToCache = [
   '/',
   '/html_exc.2.html',
